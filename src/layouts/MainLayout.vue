@@ -2,7 +2,9 @@
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-white text-black">
       <q-toolbar>
-        <q-img src="~/assets/logooo.png" width="50px"/>
+        <q-avatar size="55px">
+        <img src="~/assets/logooo.png"/>
+        </q-avatar>
         <q-toolbar-title>
           GitHub Jobs
         </q-toolbar-title>

@@ -17,7 +17,7 @@
             </template>
           </q-input>
         </q-item-section>
-        <q-item-section class="co-5">
+        <q-item-section class="col-5">
           <q-input
             @keyup.enter="handleSearch"
             dense
