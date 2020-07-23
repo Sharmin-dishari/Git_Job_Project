@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="q-pa-none">
       <q-item class="row q-px-none q-py-none ">
-        <q-item-section class="col-5">
+        <q-item-section class="col">
           <q-input
             @keyup.enter="handleSearch"
             dense
@@ -17,7 +17,7 @@
             </template>
           </q-input>
         </q-item-section>
-        <q-item-section class="col-5">
+        <q-item-section class="col">
           <q-input
             @keyup.enter="handleSearch"
             dense
@@ -32,9 +32,9 @@
             </template>
           </q-input>
         </q-item-section>
-        <q-item-section class="col-auto">
+        <q-item-section class="col-2">
           <q-btn
-            style="width:100px "
+            style="width:100%"
             outlined
             @click="handleSearch"
             label="Search"
@@ -55,21 +55,21 @@
 
     <div v-if="getJoblist.length">
       <q-card
-        class="q-my-md q-pa-sm"
+        class="q-my-md q-pa-sm click"
         v-for="(item, index) in getJoblist"
         :key="index"
-        clickable
+        
       >
         <q-item>
-          <q-item-section @click="handleNextPage(item)">
-            <q-item-label class="text-bold text-primary text-h6">{{
+          <q-item-section>
+            <q-item-label @click="handleNextPage(item)" class="text-bold text-primary text-h6">{{
               item.title
             }}</q-item-label>
             <q-item-label class="text-body2"
               >
               <q-icon name="perm_contact_calendar"></q-icon>
                &nbsp;&nbsp;<span class="text-grey">Company:&nbsp;&nbsp;</span
-              ><a class="text-primary" style="text-decoration:none" :href="item.company_url">{{ item.company }}</a>
+              ><a target="_blank" class="text-primary" style="text-decoration:none" :href="item.company_url">{{ item.company }}</a>
               <span class="text-green text-bold"
                 >&nbsp;&nbsp;&nbsp;&nbsp; {{ item.type }}
               </span></q-item-label
@@ -138,3 +138,8 @@ export default {
   name: "PageIndex"
 };
 </script>
+<style scoped>
+.click{
+ cursor: pointer;
+}
+</style>
