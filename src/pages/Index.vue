@@ -56,20 +56,26 @@
     <div v-if="getJoblist.length">
       <q-card
         class="q-my-md q-pa-sm click"
-        v-for="(item, index) in getJoblist"
+        v-for="(item, index) in sortDate"
         :key="index"
-        
       >
         <q-item>
           <q-item-section>
-            <q-item-label @click="handleNextPage(item)" class="text-bold text-primary text-h6">{{
-              item.title
-            }}</q-item-label>
-            <q-item-label class="text-body2"
-              >
+            <q-item-label
+              @click="handleNextPage(item)"
+              class="text-primary text-h6"
+              >{{ item.title }}</q-item-label
+            >
+            <q-item-label class="text-body2">
               <q-icon name="perm_contact_calendar"></q-icon>
-               &nbsp;&nbsp;<span class="text-grey">Company:&nbsp;&nbsp;</span
-              ><a target="_blank" class="text-primary" style="text-decoration:none" :href="item.company_url">{{ item.company }}</a>
+              &nbsp;&nbsp;<span class="text-grey">Company:&nbsp;&nbsp;</span
+              ><a
+                target="_blank"
+                class="text-primary"
+                style="text-decoration:none"
+                :href="item.company_url"
+                >{{ item.company }}</a
+              >
               <span class="text-green text-bold"
                 >&nbsp;&nbsp;&nbsp;&nbsp; {{ item.type }}
               </span></q-item-label
@@ -119,10 +125,11 @@ export default {
       });
     },
     getCalculatedDate(createdDate) {
-      if (date.getDateDiff(new Date(), createdDate, "days") > 365){
-         return date.getDateDiff(new Date(), createdDate, "years") + " years ago";
-      }
-      else if (date.getDateDiff(new Date(), createdDate, "hours") > 24) {
+      if (date.getDateDiff(new Date(), createdDate, "days") > 365) {
+        return (
+          date.getDateDiff(new Date(), createdDate, "years") + " years ago"
+        );
+      } else if (date.getDateDiff(new Date(), createdDate, "hours") > 24) {
         return date.getDateDiff(new Date(), createdDate, "days") + " days ago";
       }
       return date.getDateDiff(new Date(), createdDate, "hours") + " hours ago";
@@ -133,13 +140,18 @@ export default {
     this.handleSearch();
   },
   computed: {
-    ...mapGetters({ getJoblist: "example/getJoblist" })
+    ...mapGetters({ getJoblist: "example/getJoblist" }),
+    sortDate(){
+  return this.getJoblist.slice().sort((a, b)=>{
+    return (new Date(a.created_at) < new Date(b.created_at)) ? 1 : -1;
+  });
+}
   },
   name: "PageIndex"
 };
 </script>
 <style scoped>
-.click{
- cursor: pointer;
+.click {
+  cursor: pointer;
 }
 </style>
