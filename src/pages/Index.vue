@@ -1,6 +1,48 @@
 <template>
   <q-page padding>
-    <q-input @keyup.enter="handleSearch" class="q-mb-md" outlined  v-model="searchField" placeholder="Enter Job Title or Language" label="Description" clearable>
+    <div class="q-pa-none">
+      <q-item class="row q-px-none q-py-none ">
+        <q-item-section class="col-5">
+          <q-input
+            @keyup.enter="handleSearch"
+            dense
+            outlined
+            v-model="searchField"
+            placeholder="Enter Job Title or Language"
+            label="Description"
+            clearable
+          >
+            <template v-slot:prepend>
+              <q-icon name="work" />
+            </template>
+          </q-input>
+        </q-item-section>
+        <q-item-section class="co-5">
+          <q-input
+            @keyup.enter="handleSearch"
+            dense
+            outlined
+            v-model="searchLocation"
+            placeholder="Enter Prefered Job Location"
+            label="Location"
+            clearable
+          >
+            <template v-slot:prepend>
+              <q-icon name="place" />
+            </template>
+          </q-input>
+        </q-item-section>
+        <q-item-section class="col-auto">
+          <q-btn
+            style="width:100px "
+            outlined
+            @click="handleSearch"
+            label="Search"
+          />
+        </q-item-section>
+      </q-item>
+    </div>
+    <!-- <q-input @keyup.enter="handleSearch" class="q-mb-md" outlined  v-model="searchField" placeholder="Enter Job Title or Language" label="Description" clearable>
       <template v-slot:prepend>
           <q-icon name="work" />
         </template>
@@ -9,28 +51,38 @@
         <template v-slot:prepend>
           <q-icon name="place" />
         </template>
-      </q-input>
- 
-    <q-btn flat @click="handleSearch">Search</q-btn>
+      </q-input> -->
+
     <div v-if="getJoblist.length">
       <q-card
         class="q-my-md q-pa-sm"
         v-for="(item, index) in getJoblist"
         :key="index"
+        clickable
       >
-        <!-- <q-item></q-item> -->
-        <q-item-section @click="handleNextPage(item)">
-          <q-item-label class="text-bold" style="color:red">{{
-            item.title
-          }}</q-item-label>
-          <q-item-label>{{ item.company }}--------{{item.type}}</q-item-label>
-          <q-item-label>{{ item.company_url }}</q-item-label>
-          <q-item-label>{{ item.location }}</q-item-label>
-          <!-- <q-item-label v-html="item.description"></q-item-label> -->
-        </q-item-section>
-        <q-item-section side top>
-          <q-item-label>{{ getCalculatedDate(item.created_at) }}</q-item-label>
-        </q-item-section>
+        <q-item>
+          <q-item-section @click="handleNextPage(item)">
+            <q-item-label class="text-bold text-primary text-h6">{{
+              item.title
+            }}</q-item-label>
+            <q-item-label class="text-body2"
+              >
+              <q-icon name="perm_contact_calendar"></q-icon>
+               &nbsp;&nbsp;<span class="text-grey">Company:&nbsp;&nbsp;</span
+              ><a class="text-primary" style="text-decoration:none" :href="item.company_url">{{ item.company }}</a>
+              <span class="text-green text-bold"
+                >&nbsp;&nbsp;&nbsp;&nbsp; {{ item.type }}
+              </span></q-item-label
+            >
+            <!-- <q-item-label v-html="item.description"></q-item-label> -->
+          </q-item-section>
+          <q-item-section side top>
+            <q-item-label class="text-body1">{{ item.location }}</q-item-label>
+            <q-item-label>{{
+              getCalculatedDate(item.created_at)
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-card>
     </div>
     <div v-else>No Data Found</div>
@@ -67,7 +119,10 @@ export default {
       });
     },
     getCalculatedDate(createdDate) {
-      if (date.getDateDiff(new Date(), createdDate, "hours") > 24) {
+      if (date.getDateDiff(new Date(), createdDate, "days") > 365){
+         return date.getDateDiff(new Date(), createdDate, "years") + " years ago";
+      }
+      else if (date.getDateDiff(new Date(), createdDate, "hours") > 24) {
         return date.getDateDiff(new Date(), createdDate, "days") + " days ago";
       }
       return date.getDateDiff(new Date(), createdDate, "hours") + " hours ago";
@@ -75,7 +130,7 @@ export default {
     ...mapActions({ getApiAction: "example/getApiAction" })
   },
   created() {
-    this.handleSearch()
+    this.handleSearch();
   },
   computed: {
     ...mapGetters({ getJoblist: "example/getJoblist" })

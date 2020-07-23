@@ -1,7 +1,6 @@
 <template>
     <q-page padding>
        <div v-html="description.description"></div>
-       {{description.description}}
     </q-page>
 </template>
 <script>
