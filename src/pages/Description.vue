@@ -19,6 +19,6 @@ export default {
 </script>
 <style>
 p {
-    font-weight: bold;
+    font-weight: 500;
 }
 </style>

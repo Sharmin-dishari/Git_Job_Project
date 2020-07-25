@@ -91,7 +91,14 @@
         </q-item>
       </q-card>
     </div>
-    <div v-else>No Data Found</div>
+    <div class="no-tasks absolute-center" v-else>
+      <q-icon
+      name="check"
+      size="100px"
+      color="primary"
+      />
+      <div class="text-h5 text-primary text-center">No Matched</div>
+      </div> 
   </q-page>
 </template>
 
