@@ -1,6 +1,6 @@
 const routes = [
   {
-    path: "/",
+    path: "",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/Index.vue") }]
   },
@@ -12,9 +12,19 @@ const routes = [
         path: "",
         component: () => import("pages/Description.vue"),
         name: "description",
-        props:true
+        props: true
       }
     ]
+  },
+  {
+    path: "/covid",
+    component: () => import("pages/Covid.vue"),
+    name: "Covid"
+  },
+  {
+    path: "/covidHome",
+    component: () => import("pages/CovidHome.vue"),
+    name: "CovidHome"
   },
 
   // Always leave this as last one,

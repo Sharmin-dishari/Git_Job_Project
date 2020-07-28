@@ -92,13 +92,9 @@
       </q-card>
     </div>
     <div class="no-tasks absolute-center" v-else>
-      <q-icon
-      name="check"
-      size="100px"
-      color="primary"
-      />
+      <q-icon name="check" size="100px" color="primary" />
       <div class="text-h5 text-primary text-center">No Matched</div>
-      </div> 
+    </div>
   </q-page>
 </template>
 
@@ -148,11 +144,11 @@ export default {
   },
   computed: {
     ...mapGetters({ getJoblist: "example/getJoblist" }),
-    sortDate(){
-  return this.getJoblist.slice().sort((a, b)=>{
-    return (new Date(a.created_at) < new Date(b.created_at)) ? 1 : -1;
-  });
-}
+    sortDate() {
+      return this.getJoblist.slice().sort((a, b) => {
+        return new Date(a.created_at) < new Date(b.created_at) ? 1 : -1;
+      });
+    }
   },
   name: "PageIndex"
 };

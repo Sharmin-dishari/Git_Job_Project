@@ -1,24 +1,22 @@
 <template>
-    <q-page padding>
-       <div v-html="description.description"></div>
-    </q-page>
+  <q-page padding>
+    <div v-html="description.description"></div>
+  </q-page>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            
-        }
-    },
-    props: {
-        description:{
-            type:Object
-        }
+  data() {
+    return {};
+  },
+  props: {
+    description: {
+      type: Object
     }
-}
+  }
+};
 </script>
 <style>
 p {
-    font-weight: 500;
+  font-weight: 500;
 }
 </style>
