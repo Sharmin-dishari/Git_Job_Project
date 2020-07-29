@@ -1,6 +1,7 @@
 export default function() {
   return {
     jobList: [],
-    covidList: []
+    covidList: [],
+    coviHistory: []
   };
 }

@@ -25,3 +25,23 @@ export function getCovidAction({ commit }, payload) {
   xhr.send(data);
   // console.log(getCovidApi());
 }
+export function getCovidHistory({ commit }, payload) {
+  var data = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function() {
+    if (this.readyState === this.DONE) {
+      console.log(JSON.parse(this.responseText).response);
+      commit("setCovidHistory", JSON.parse(this.responseText).response);
+      return JSON.parse(this.responseText).response;
+    }
+  });
+  xhr.open("GET", "https://covid-193.p.rapidapi.com/history");
+  xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+  xhr.setRequestHeader(
+    "x-rapidapi-key",
+    "b84b0b809fmsh0f18684c293125ep14c865jsn9ddb336c40b6"
+  );
+  xhr.send(data);
+  // console.log(getCovidApi());
+}

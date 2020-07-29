@@ -1,25 +1,47 @@
 <template>
-  <div>
-    <q-layout view="lHh Lpr lFf">
-      <q-header class="text-primary bg-white">
-        <q-toolbar>
-          <q-avatar size="55px">
-            <img src="~/assets/cov.jpg" />
-          </q-avatar>
-          <q-toolbar-title>
-            CoVid 19
-          </q-toolbar-title>
-        </q-toolbar>
-      </q-header>
-      <q-page-container>
-        <q-page padding>
-          <q-card>
-            <img src="~/assets/font2.jpg" height="400px" width="150px" />
-          </q-card>
-            <q-btn  style="width:100%" outlined label="Let's Start" />
-          </q-item-section>
-        </q-page>
-      </q-page-container>
-    </q-layout>
-  </div>
+  <q-layout view="lHh Lpr lFf">
+    <q-header class="text-black bg-white">
+      <q-toolbar>
+        <q-avatar size="55px">
+          <img src="~/assets/cov.jpg" />
+        </q-avatar>
+        <q-toolbar-title style="font-size:23px">
+          CoVid-19
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+    <q-page-container>
+      <q-page padding>
+        <q-avatar style=" height:370px; width:100% ">
+          <img src="~/assets/final.jpg" />
+        </q-avatar>
+        <div class="button">
+          <q-btn
+            @click="handleNextPage"
+            class="q-pa-sm q-ma-md bg-blue-3"
+            style="width:150px"
+            outlined
+            label="Let's Start"
+          />
+        </div>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
+<script>
+export default {
+  methods: {
+    handleNextPage() {
+      this.$router.push({ name: "Covid" });
+    }
+  }
+};
+</script>
+<style scoped>
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+</style>
