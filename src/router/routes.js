@@ -1,36 +1,28 @@
 const routes = [
   {
-    path: "",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Index.vue") }]
-  },
-  {
-    path: "description",
+    path: "/gitjobs",
     component: () => import("layouts/MainLayout.vue"),
     children: [
+      { path: "", component: () => import("pages/Index.vue") },
       {
-        path: "",
+        path: "description",
         component: () => import("pages/Description.vue"),
         name: "description"
       }
     ]
   },
-  {
-    path: "/covidHome",
-    component: () => import("pages/CovidHome.vue"),
-    name: "CovidHome"
-  },
-  {
-    path: "/test",
-    component: () => import("components/RandomChart.vue"),
-    name: "RandomChart"
-  },
+  // {
+  //   path: "/covidHome",
+  //   component: () => import("pages/CovidHome.vue"),
+  //   name: "CovidHome"
+  // },
+
   {
     path: "/",
     component: () => import("layouts/CovidLayout"),
     children: [
       {
-        path: "covid",
+        path: "",
         component: () => import("pages/Covid.vue"),
         name: "Covid",
         props: true

@@ -12,7 +12,7 @@
     </q-header>
     <q-page-container>
       <q-page padding>
-        <q-avatar style=" height:370px; width:100% ">
+        <q-avatar style=" height:370px; width:100% ;float:center">
           <img src="~/assets/final.jpg" />
         </q-avatar>
         <div class="button">

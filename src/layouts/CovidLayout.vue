@@ -1,29 +1,23 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header
-      class="text-black`"
-      style="background-color: #FF3CAC;background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 58%, #2B86C5 100%);"
-    >
+    <q-header class="text-white" style="background-color: #473E97;">
       <div class="row">
         <div class="q-pa-md col">
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+          <q-btn flat v-if="showBackButton()" @click="handleBackPage()" round dense icon="keyboard_backspace" />
+          <q-btn flat v-else @click="drawer = !drawer" round dense icon="menu" />
         </div>
         <div class="q-pa-md col">
           <q-icon style="float:right" name="notifications_none" size="30px" />
         </div>
       </div>
       <q-item>
-        <q-toolbar class="q-mb-md">
-          <q-avatar size="55px">
-            <img src="~/assets/cov.jpg" />
-          </q-avatar>
-          <q-toolbar-title style="font-size:18px">
-            Covid Report
+          <q-toolbar-title style="font-size:22px">
+           Statistics
           </q-toolbar-title>
         </q-toolbar>
       </q-item>
     </q-header>
-    <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="600">
+    <!-- <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="600">
       <q-scroll-area
         style="height: calc(100% - 200px); margin-top: 180px; border-right: 1px solid #ddd"
       >
@@ -71,7 +65,7 @@
           <div class="text-weight-bold">Sharmin Akter</div>
         </div>
       </q-img>
-    </q-drawer>
+    </q-drawer> -->
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -84,6 +78,18 @@ export default {
     return {
       drawer: false
     };
-  }
+  },
+  computed: {
+    
+  },
+  methods: {
+    handleBackPage(){
+      console.log(this.$router)
+      this.$router.back()
+    },
+  showBackButton(){
+      return this.$router.history.current.name !== 'Covid'
+    }
+  },
 };
 </script>

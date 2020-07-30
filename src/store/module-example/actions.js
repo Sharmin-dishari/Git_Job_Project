@@ -43,5 +43,4 @@ export function getCovidHistory({ commit }, payload) {
     "b84b0b809fmsh0f18684c293125ep14c865jsn9ddb336c40b6"
   );
   xhr.send(data);
-  // console.log(getCovidApi());
 }
