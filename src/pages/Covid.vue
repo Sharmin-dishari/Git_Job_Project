@@ -1,5 +1,12 @@
 <template>
-      <q-page padding >
+<div class="flex fixed-center" v-if="!getCovidList.length">
+        <q-spinner-audio
+          color="primary"
+          size="2em"
+        />
+        <q-tooltip :offset="[0, 8]">QSpinnerAudio</q-tooltip>
+      </div>
+      <q-page v-else padding >
            <q-select
             clearable
             rounded
@@ -16,6 +23,10 @@
           </q-item-section>
           </q-item>
         <q-card @click="handleGraphPage(item)" class="q-mt-md " padding v-for="(item, index) in filteredCovidList" :key="index">
+              <q-tooltip anchor="top middle" self="top middle" :offset="[10, 10]">
+          <strong>Want to see</strong><em>Graph</em>
+          (<q-icon name="keyboard_arrow_down"/>)
+        </q-tooltip>
             <q-card class="col box" >
               <q-item-label><span class="country-container  text-bold text-grey text-h5">{{ item.country }}</span></q-item-label>
             </q-card>
@@ -36,6 +47,7 @@
             </q-card> -->
             <q-card class="col box5">
             <q-item-label><span class="itemsAll">Total Deaths</br>{{ item.deaths.total }}</span></q-item-label>
+        
             </q-card>
             <q-card class="col box6">
             <q-item-label><span class="itemsAll">Total Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
@@ -45,16 +57,18 @@
       </q-page>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters,mapMutations } from "vuex";
 import {date} from "quasar" 
 export default {
   data() {
     return {
       selectBox: null,
+      loading: false
     };
   },
   methods: {
     ...mapActions({ covidAction: "example/getCovidAction" }),
+    ...mapMutations({ setCovidList:"example/setCovidList" }),
     handleGraphPage(value){
       console.log(value)
       this.$router.push({name:"graph", params: {statisticsobject:value} });
@@ -63,8 +77,11 @@ export default {
        return date.formatDate(day,'dddd D MMMM')
     },
   },
-  created() {
-    this.covidAction();
+   async created() {
+    await this.covidAction(); 
+  },
+  destroyed() {
+    this.setCovidList([])
   },
   computed: {
     ...mapGetters({ getCovidList: "example/getCovidlist" }),

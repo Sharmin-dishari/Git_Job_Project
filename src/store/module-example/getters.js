@@ -6,3 +6,6 @@ export function getCovidlist(state) {
     return a.cases.total < b.cases.total;
   });
 }
+export function getCvHistory(state) {
+  return [...state.coviHistory].reverse();
+}

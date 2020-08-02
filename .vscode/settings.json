@@ -13,7 +13,7 @@
       "autoFix": true
     }
   ],
-  "eslint.workingDirectories": ["../src"],
+
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
   "vetur.validation.template": false,

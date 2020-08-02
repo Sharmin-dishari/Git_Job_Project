@@ -46,12 +46,27 @@
             </q-item>
             <q-item class="graph-component">
       <line-chart :chart-data="chartData"></line-chart>
+      
+    </q-item>
+    <q-item class="graph-component">
+      <div class="flex items-center justify-center" v-if="!covidHistory.length">
+        <q-spinner-audio
+          color="primary"
+          size="2em"
+        />
+        <q-tooltip :offset="[0, 8]">QSpinnerAudio</q-tooltip>
+      </div>
+      <lineC v-else :chart-data="lineChartDataTest"/>
+    </q-item>
+    <q-item>
     </q-item>
 </div>
 
 </template>
 <script>
 import LineChart from "../components/Chart/LineChart";
+import LineC from "../components/Chart/Line"
+import { mapActions,mapGetters,mapMutations } from "vuex";
 export default {
   props: {
     statisticsobject: {
@@ -60,14 +75,54 @@ export default {
     }
   },
   components: {
-    LineChart
+    LineChart,
+    LineC
   },
   data() {
     return {
       location: null
     };
   },
+  methods: {
+    ...mapActions({getCovidHistory:"example/getCovidHistory"}),
+    ...mapMutations({setCovidHistory: "example/setCovidHistory"})
+  },
+  destroyed() {
+    this.setCovidHistory([])
+  },
+  created() {
+    this.getCovidHistory(
+      {
+        country :this.statisticsobject.country ,
+        day : null
+      }
+    )
+  },
   computed: {
+    ...mapGetters({covidHistory: "example/getCvHistory"}),
+    lineChartData(){
+    return this.covidHistory.map((value)=>{
+      return value.time.slice(0,10)
+    })
+    },
+    lineChartDataSet(){
+      return this.covidHistory.map((value)=>{
+        return Number(value.cases.new)
+      })
+    },
+    lineChartDataTest(){
+      return{
+        labels: this.lineChartData,
+        datasets: [
+          {
+            label: "Affected",
+            backgroundColor:"#FF5959",
+            fill: true,
+           data: this.lineChartDataSet
+          }
+        ]
+      }
+    },
     chartData() {
       return {
         labels: ["Total Death", "Total Recovered", " Total Unrecovered "],
