@@ -7,7 +7,42 @@
         <q-tooltip :offset="[0, 8]">QSpinnerAudio</q-tooltip>
       </div>
       <q-page v-else padding >
-           <q-select
+        <q-card>
+        <q-tabs
+          v-model="tab"
+          dense
+          class="text-grey"
+          active-color="primary"
+          indicator-color="primary"
+          align="justify"
+          narrow-indicator
+        >
+          <q-tab name="mails" label="Total" />
+          <q-tab name="alarms" label="Today" />
+          <q-tab name="movies" label="Yesterday" />
+        </q-tabs>
+
+        <q-separator />
+
+        <q-tab-panels v-model="tab" animated>
+          <q-tab-panel name="mails">
+            <div class="text-h6">Total</div>
+           <q-item class="column q-gutter-md">
+           <q-card class="col " style=" background-color:#FFB259;margin-right:15%">
+              <q-item-label><span class="itemsAll">Corona Virus Cases</br>{{ getCovidList[0].cases.total }}</span></q-item-label>
+           </q-card>
+              <q-card class="col" style="margin-left:10%;margin-right:10%; background-color: #FF5959;">
+            <q-item-label><span class="itemsAll">Total Deaths</br>{{getCovidList[0].deaths.total }}</span></q-item-label>
+            </q-card>
+            <q-card class="col" style="margin-left:15% ; background-color: #9059FF;">
+            <q-item-label><span class="itemsAll">Total Recovered</br>{{ getCovidList[0].cases.recovered }}</span></q-item-label>
+            </q-card> 
+          </q-item>
+          </q-tab-panel>
+
+          <q-tab-panel name="alarms">
+            <div class="text-h6">Today</div>
+            <q-select
             clearable
             rounded
             outlined
@@ -15,7 +50,7 @@
             :options="getAllCountry"
             label="Select Country"
           />
-          <q-item >
+          <q-item>
           <q-item-section>
           <q-item-label class="country text-body2">
           <span>Last Updated: </span> {{getCovidList[0] && updateDateFormat(getCovidList[0].day)}}
@@ -32,7 +67,7 @@
             </q-card>
           <q-item class="row q-gutter-md">
             <q-card class="col box1" >
-              <q-item-label><span class="itemsAll" color="teal">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
             </q-card>
           <q-card class="col box2">
               <q-item-label><span class="itemsAll">New Affected</br>{{ item.cases.new }}</span></q-item-label>
@@ -40,20 +75,75 @@
            </q-item>
            <q-item class="row q-gutter-md">
            <q-card class="col box3">
-              <q-item-label><span class="itemsAll">Critical Case</br>{{ item.cases.critical }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active }}</span></q-item-label>
            </q-card>
               <!-- <q-card class="col box4" style="">
             <q-item-label><span class="itemsAll">Total Tests</br>{{ item.tests.total }}</span></q-item-label>
             </q-card> -->
             <q-card class="col box5">
-            <q-item-label><span class="itemsAll">Total Deaths</br>{{ item.deaths.total }}</span></q-item-label>
+            <q-item-label><span class="itemsAll">New Deaths</br>{{ item.deaths.new }}</span></q-item-label>
         
             </q-card>
             <q-card class="col box6">
             <q-item-label><span class="itemsAll">Total Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
             </q-card>
           </q-item>
+            <q-item class="row justify-center">
+              <q-btn  @click="handleGraphPage(item)" round color="primary" icon="bar_chart" />
+            </q-item>
         </q-card>
+          </q-tab-panel>
+
+          <q-tab-panel name="movies">
+            <div class="text-h6">Yesterday</div>
+            <q-select
+            
+            @input="handleSearch"
+            clearable
+            rounded
+            outlined
+            v-model="selectBox1"
+            :options="getAllCountry"
+            label="Select Country"
+          />
+           <q-item>
+          <q-item-section>
+          <q-item-label class="country text-body2">
+          <span>Last Updated: </span> {{handlePreviousDate[0] && updateDateFormat(handlePreviousDate[0].day)}}
+          </q-item-label>
+          </q-item-section>
+          </q-item>
+
+        <q-card class="q-mt-md " padding v-for="(item, index) in handlePreviousDate" :key="index">
+            <q-card class="col box" >
+              <q-item-label><span class="country-container  text-bold text-grey text-h5">{{ item.country }}</span></q-item-label>
+            </q-card>
+          <q-item class="row q-gutter-md">
+            <q-card class="col box1" >
+              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
+            </q-card>
+          <q-card class="col box2">
+              <q-item-label><span class="itemsAll">New Affected</br>{{ item.cases.new }}</span></q-item-label>
+            </q-card>
+           </q-item>
+           <q-item class="row q-gutter-md">
+           <q-card class="col box3">
+              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active }}</span></q-item-label>
+           </q-card>
+            <q-card class="col box5">
+            <q-item-label><span class="itemsAll"> Death</br>{{ item.deaths.new }}</span></q-item-label>
+        
+            </q-card>
+            <q-card class="col box6">
+            <q-item-label><span class="itemsAll">Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
+            </q-card>
+            
+            
+            </q-item>
+             </q-card>
+          </q-tab-panel>
+        </q-tab-panels>
+      </q-card>       
       </q-page>
 </template>
 <script>
@@ -63,16 +153,25 @@ export default {
   data() {
     return {
       selectBox: null,
-      loading: false
+      selectBox1: null,
+      loading: false,
+       tab: 'mails'
     };
   },
   methods: {
-    ...mapActions({ covidAction: "example/getCovidAction" }),
+    ...mapActions({ covidAction: "example/getCovidAction",getCovidHistory:"example/getCovidHistory" }),
     ...mapMutations({ setCovidList:"example/setCovidList" }),
     handleGraphPage(value){
       console.log(value)
       this.$router.push({name:"graph", params: {statisticsobject:value} });
     },
+     handleSearch() {
+      this.getCovidHistory({
+        country: this.selectBox1,
+        day: null
+      });
+    },
+    
     updateDateFormat(day){
        return date.formatDate(day,'dddd D MMMM')
     },
@@ -84,7 +183,7 @@ export default {
     this.setCovidList([])
   },
   computed: {
-    ...mapGetters({ getCovidList: "example/getCovidlist" }),
+    ...mapGetters({ getCovidList: "example/getCovidlist",covidHistory: "example/getCvHistory"}),
     getAllCountry() {
       return this.getCovidList
         .map(item => {
@@ -93,8 +192,15 @@ export default {
         .sort((a, b) => {
           return a > b ? 1 : -1;
         });
-    },
-    
+    }, 
+  handlePreviousDate(){
+    return this.covidHistory.filter(item => {
+      if(item.day === new Date(Date.now() - 1 * 86400000 - new Date().getTimezoneOffset() * 60000).toISOString().split('T')[0])
+          {
+            return item.country;
+          }
+        })
+  },
     filteredCovidList() {
       return this.getCovidList.filter(item => {
         if (this.selectBox === null) {
@@ -107,6 +213,9 @@ export default {
 };
 </script>
 <style scoped>
+.col{
+  padding: 15px;
+}
 .box,.box1,.box2,.box3,.box4,.box5,.box6 {
   display:flex;
   border-radius: 5px;
@@ -141,5 +250,19 @@ color:grey;
   display: flex;
   align-items: center; 
   color:white;
+}
+.report{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.report>div{
+   font-size: 18px;
+   color:#1b50b3af
+}
+.report>div:hover{
+   font-size: 18px;
+   font-weight: bold;
 }
 </style>

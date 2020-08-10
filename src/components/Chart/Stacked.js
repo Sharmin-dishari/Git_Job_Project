@@ -1,8 +1,8 @@
-import { Stacked, mixins } from "vue-chartjs";
+import { Line, mixins } from "vue-chartjs";
 const { reactiveProp } = mixins;
 
 export default {
-  extends: Stacked,
+  extends: Line,
   mixins: [reactiveProp],
   props: {
     chartdata: {
@@ -12,6 +12,24 @@ export default {
     options: {
       type: Object,
       default: null
+      // scales: {
+      //   yAxes: [
+      //     {
+      //       stacked: true,
+      //       ticks: {
+      //         beginAtZero: true
+      //       }
+      //     }
+      //   ],
+      //   xAxes: [
+      //     {
+      //       stacked: true,
+      //       ticks: {
+      //         beginAtZero: true
+      //       }
+      //     }
+      //   ]
+      // }
     }
   },
   mounted() {
