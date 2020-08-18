@@ -26,18 +26,20 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="mails">
-            <div class="text-h6">Total</div>
-           <q-item class="column q-gutter-md">
-           <q-card class="col " style=" background-color:#FFB259;margin-right:15%">
-              <q-item-label><span class="itemsAll">Corona Virus Cases</br>{{ getCovidList[0].cases.total }}</span></q-item-label>
-           </q-card>
-              <q-card class="col" style="margin-left:10%;margin-right:10%; background-color: #FF5959;">
-            <q-item-label><span class="itemsAll">Total Deaths</br>{{getCovidList[0].deaths.total }}</span></q-item-label>
-            </q-card>
-            <q-card class="col" style="margin-left:15% ; background-color: #9059FF;">
-            <q-item-label><span class="itemsAll">Total Recovered</br>{{ getCovidList[0].cases.recovered }}</span></q-item-label>
-            </q-card> 
-          </q-item>
+            <div class="text-h6">Total</div>   
+           <div style="text-align:center">
+              <div class="text-h6">Corona Virus Cases</div>
+              <div class="text-h5 text-weight-bolder text-blue-grey-4">{{ getCovidList[0].cases.total.toLocaleString() }}</div>
+           </div></br></br>
+              <div style="text-align:center" >
+            <div class="text-h6">Total Deaths</div>
+            <div class="text-h5 text-weight-bolder text-blue-grey-10">{{getCovidList[0].deaths.total.toLocaleString() }}</div>
+            </div></br></br>
+            <div style="text-align:center">
+            <div class="text-h6">Total Recovered</div>
+            <div class=" text-weight-bolder text-h5 text-green-9">{{ getCovidList[0].cases.recovered.toLocaleString()}}</div>
+            </div> 
+          
           </q-tab-panel>
 
           <q-tab-panel name="alarms">
@@ -67,7 +69,7 @@
             </q-card>
           <q-item class="row q-gutter-md">
             <q-card class="col box1" >
-              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total.toLocaleString() }}</span></q-item-label>
             </q-card>
           <q-card class="col box2">
               <q-item-label><span class="itemsAll">New Affected</br>{{ item.cases.new }}</span></q-item-label>
@@ -75,17 +77,17 @@
            </q-item>
            <q-item class="row q-gutter-md">
            <q-card class="col box3">
-              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active.toLocaleString() }}</span></q-item-label>
            </q-card>
               <!-- <q-card class="col box4" style="">
             <q-item-label><span class="itemsAll">Total Tests</br>{{ item.tests.total }}</span></q-item-label>
             </q-card> -->
             <q-card class="col box5">
-            <q-item-label><span class="itemsAll">New Deaths</br>{{ item.deaths.new }}</span></q-item-label>
+            <q-item-label><span class="itemsAll">New Deaths</br>{{ item.deaths.new}}</span></q-item-label>
         
             </q-card>
             <q-card class="col box6">
-            <q-item-label><span class="itemsAll">Total Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
+            <q-item-label><span class="itemsAll">Total Recovered</br>{{ item.cases.recovered.toLocaleString() }}</span></q-item-label>
             </q-card>
           </q-item>
             <q-item class="row justify-center">
@@ -120,7 +122,7 @@
             </q-card>
           <q-item class="row q-gutter-md">
             <q-card class="col box1" >
-              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total.toLocaleString() }}</span></q-item-label>
             </q-card>
           <q-card class="col box2">
               <q-item-label><span class="itemsAll">New Affected</br>{{ item.cases.new }}</span></q-item-label>
@@ -128,14 +130,14 @@
            </q-item>
            <q-item class="row q-gutter-md">
            <q-card class="col box3">
-              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active.toLocaleString() }}</span></q-item-label>
            </q-card>
             <q-card class="col box5">
-            <q-item-label><span class="itemsAll"> Death</br>{{ item.deaths.new }}</span></q-item-label>
+            <q-item-label><span class="itemsAll"> Death</br>{{ item.deaths.new}}</span></q-item-label>
         
             </q-card>
             <q-card class="col box6">
-            <q-item-label><span class="itemsAll">Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
+            <q-item-label><span class="itemsAll">Recovered</br>{{ item.cases.recovered.toLocaleString() }}</span></q-item-label>
             </q-card>
             
             
@@ -162,7 +164,6 @@ export default {
     ...mapActions({ covidAction: "example/getCovidAction",getCovidHistory:"example/getCovidHistory" }),
     ...mapMutations({ setCovidList:"example/setCovidList" }),
     handleGraphPage(value){
-      console.log(value)
       this.$router.push({name:"graph", params: {statisticsobject:value} });
     },
      handleSearch() {
@@ -193,6 +194,9 @@ export default {
           return a > b ? 1 : -1;
         });
     }, 
+//     function numberWithCommas(x) {
+//     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+// }
   handlePreviousDate(){
     return this.covidHistory.filter(item => {
       if(item.day === new Date(Date.now() - 1 * 86400000 - new Date().getTimezoneOffset() * 60000).toISOString().split('T')[0])

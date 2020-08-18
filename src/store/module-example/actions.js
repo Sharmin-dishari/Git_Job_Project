@@ -32,7 +32,6 @@ export function getCovidHistory({ commit }, payload) {
 
   xhr.addEventListener("readystatechange", function() {
     if (this.readyState === this.DONE) {
-      console.log(this.responseText);
       commit("setCovidHistory", JSON.parse(this.responseText).response);
       return JSON.parse(this.responseText).response;
     }
