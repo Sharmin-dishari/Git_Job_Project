@@ -2,7 +2,7 @@
   "name": "git_job_app",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "git_job-app",
+  "productName": "covid19",
   "author": "Sharmin-dishari <sharminakter1820@gmail.com>",
   "private": true,
   "scripts": {
