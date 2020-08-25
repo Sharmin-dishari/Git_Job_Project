@@ -28,6 +28,12 @@ const routes = [
         props: true
       },
       {
+        path: "report",
+        component: () => import("pages/ReportTable.vue"),
+        name: "report",
+        props: true
+      },
+      {
         path: "graph",
         component: () => import("pages/StatisticsCovid.vue"),
         name: "graph",

@@ -145,7 +145,14 @@
              </q-card>
           </q-tab-panel>
         </q-tab-panels>
-      </q-card>       
+      </q-card> 
+       <div @click=" handleReport()" class="flex items-center justify-center q-mt-xl text-bold text-h6" clickable>
+            <q-item clickable>
+              <q-item-section>
+                <q-item-label class="animation">Top 10 countries Report</q-item-label>
+              </q-item-section>
+            </q-item>
+        </div>      
       </q-page>
 </template>
 <script>
@@ -165,6 +172,9 @@ export default {
     ...mapMutations({ setCovidList:"example/setCovidList" }),
     handleGraphPage(value){
       this.$router.push({name:"graph", params: {statisticsobject:value} });
+    },
+     handleReport() {
+      this.$router.push({ name: "report" });
     },
      handleSearch() {
       this.getCovidHistory({
@@ -268,5 +278,25 @@ color:grey;
 .report>div:hover{
    font-size: 18px;
    font-weight: bold;
+}
+
+.animation {
+
+  color: red;
+  position: relative;
+  animation-name: example;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes example {
+  0%   {color:red; }
+  25%  {color:yellow;}
+  50%  {color:blue; }
+  75%  {color:green;}
+  100% {color:red; }
 }
 </style>
