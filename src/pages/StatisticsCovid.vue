@@ -40,11 +40,11 @@
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel class="graph-component"  name="mails">
+          <q-tab-panel class="graph-component" name="mails">
       <line-chart :chart-data="chartData"></line-chart>   
           </q-tab-panel>
 
-          <q-tab-panel name="alarms">
+          <q-tab-panel class="graph-component" name="alarms">
       <div class="flex items-center justify-center" v-if="!covidHistory.length">
         <q-spinner-audio
           color="primary"
@@ -55,7 +55,7 @@
       <lineC v-else :chart-data="lineChartDataTest"/>
           </q-tab-panel>
 
-          <q-tab-panel   name="movies" >
+          <q-tab-panel class="graph-component" name="movies" >
             <div class="flex items-center justify-center" v-if="!covidHistory.length">
               <q-spinner-audio
           color="primary"
@@ -218,8 +218,7 @@ export default {
   float: center; 
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
-  background: white;
-  
+  background: white; 
   
 }
 

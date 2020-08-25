@@ -156,7 +156,7 @@
       </q-page>
 </template>
 <script>
-import { mapActions, mapGetters,mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import {date} from "quasar" 
 export default {
   data() {
@@ -204,9 +204,6 @@ export default {
           return a > b ? 1 : -1;
         });
     }, 
-//     function numberWithCommas(x) {
-//     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-// }
   handlePreviousDate(){
     return this.covidHistory.filter(item => {
       if(item.day === new Date(Date.now() - 1 * 86400000 - new Date().getTimezoneOffset() * 60000).toISOString().split('T')[0])
