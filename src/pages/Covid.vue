@@ -281,7 +281,6 @@ color:grey;
 }
 
 .animation {
-
   color: red;
   position: relative;
   animation-name: example;

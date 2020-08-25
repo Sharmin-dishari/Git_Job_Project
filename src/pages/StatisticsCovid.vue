@@ -1,21 +1,5 @@
 <template>
    <div style="background-color: #473E97;">
-      <q-item-section>
-        <!-- <q-btn-toggle
-         no-caps
-        rounded
-        class="my-custom-toggle text-white"
-      spread
-      v-model="location"
-      toggle-color="white"
-      toggle-text-color="black"
-      :options="[
-        {label: 'My Country', value: 'one'},
-        {label: 'Global', value: 'two'},
-      ]"
-    /> -->
-    </q-item-section>
-   
             <q-item class="box q-pa-md  text-bold text-white text-h5">
               <q-item-label><span class="itemsAll">{{ statisticsobject.country }}</span></q-item-label>
             </q-item>
@@ -42,7 +26,7 @@
         <q-tabs
           v-model="tab"
           dense
-          class="text-grey graph-component"
+          class="text-grey"
           active-color="primary"
           indicator-color="primary"
           align="justify"
@@ -56,7 +40,7 @@
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel  name="mails">
+          <q-tab-panel class="graph-component"  name="mails">
       <line-chart :chart-data="chartData"></line-chart>   
           </q-tab-panel>
 
@@ -228,6 +212,7 @@ export default {
 .graph-component {
   max-width: 50rem;
   display: flex;
+  margin:0 auto;
   align-items: center;
   justify-content: center;
   float: center; 
