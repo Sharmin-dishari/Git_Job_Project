@@ -34,6 +34,12 @@ const routes = [
         props: true
       },
       {
+        path: "tips",
+        component: () => import("pages/HealthTips.vue"),
+        name: "tips",
+        props: true
+      },
+      {
         path: "graph",
         component: () => import("pages/StatisticsCovid.vue"),
         name: "graph",

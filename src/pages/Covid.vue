@@ -98,8 +98,7 @@
 
           <q-tab-panel name="movies">
             <div class="text-h6">Yesterday</div>
-            <q-select
-            
+            <q-select    
             @input="handleSearch"
             clearable
             rounded
@@ -205,7 +204,7 @@ export default {
         });
     }, 
   handlePreviousDate(){
-    return this.covidHistory.filter(item => {
+     return this.covidHistory.filter(item => {
       if(item.day === new Date(Date.now() - 1 * 86400000 - new Date().getTimezoneOffset() * 60000).toISOString().split('T')[0])
           {
             return item.country;

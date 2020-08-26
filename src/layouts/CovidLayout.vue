@@ -17,28 +17,28 @@
         </q-toolbar>
       </q-item>
     </q-header>
-    <!-- <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="600">
+    <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="600">
       <q-scroll-area
         style="height: calc(100% - 200px); margin-top: 180px; border-right: 1px solid #ddd"
       >
         <q-list padding>
-          <q-item clickable v-ripple>
+          <q-item clickable v-ripple to="/tips">
             <q-item-section avatar>
               <q-icon name="inbox" />
             </q-item-section>
 
             <q-item-section>
-              Inbox
+             Health Tips
             </q-item-section>
           </q-item>
 
-          <q-item active clickable v-ripple>
+          <q-item active clickable v-ripple to="/report">
             <q-item-section avatar>
-              <q-icon name="star" />
+              <q-icon name="table_chart" />
             </q-item-section>
 
             <q-item-section>
-              Star
+              Report
             </q-item-section>
           </q-item>
 
@@ -56,16 +56,16 @@
 
       <q-img
         class="absolute-top"
-        style="height: 150px;background-color: #FF3CAC;background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 58%, #2B86C5 100%);"
+        style="height: 114px;background-color: #FF3CAC;background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 58%, #2B86C5 100%);"
       >
         <div class="absolute-bottom bg-transparent">
-          <q-avatar size="56px" class="q-mb-sm">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+          <q-avatar size="65px" class="q-mb-sm">
+            <img src="~/assets/tumpa.jpg" />
           </q-avatar>
           <div class="text-weight-bold">Sharmin Akter</div>
         </div>
       </q-img>
-    </q-drawer> -->
+    </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>

@@ -7,6 +7,7 @@
       :data="tableData"
       :columns="tableColumns"
       row-key="name"
+      :pagination.sync="pagination"
     />
   </div>
 </template>
@@ -15,7 +16,14 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      pagination: {
+        sortBy: "desc",
+        descending: false,
+        page: 1,
+        rowsPerPage: 10
+      }
+    };
   },
   methods: {
     ...mapActions({
@@ -71,7 +79,9 @@ export default {
           name: item.country,
           Cases: item.cases.total,
           Deaths: item.deaths.total,
-          DeathRate: (Number(item.deaths["1M_pop"]) / 10000).toFixed(3)
+          DeathRate: `${Number(
+            (item.deaths.total * 100) / item.cases.total
+          ).toFixed(3)} %`
         };
       });
     }
