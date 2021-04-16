@@ -6,7 +6,6 @@
       animated
       :control-type="controlType"
       control-color="black"
-      navigation
       padding
       arrows
       class="text-black rounded-borders"
@@ -62,6 +61,10 @@
         </q-item-section>
       </q-carousel-slide>
     </q-carousel>
+    <div class="q-pa-xl">
+      <q-btn color="white" text-color="black" label="Standard" />
+    <q-btn color="white" text-color="black" label="Standard" />
+    </div>
   </div>
 </template>
 <script>

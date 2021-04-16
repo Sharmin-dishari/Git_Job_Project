@@ -24,7 +24,7 @@
         <q-list padding>
           <q-item clickable v-ripple to="/tips">
             <q-item-section avatar>
-              <q-icon name="inbox" />
+              <q-icon name="medical_services" />
             </q-item-section>
 
             <q-item-section>
