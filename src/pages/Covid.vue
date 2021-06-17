@@ -29,15 +29,15 @@
             <div class="text-h6">Total</div>   
            <div style="text-align:center">
               <div class="text-h6">Corona Virus Cases</div>
-              <div class="text-h5 text-weight-bolder text-blue-grey-4">{{ getCovidList[0].cases.total.toLocaleString() }}</div>
+              <div class="text-h5 text-weight-bolder text-blue-grey-4">{{ getCovidList[0].cases.total }}</div>
            </div></br></br>
               <div style="text-align:center" >
             <div class="text-h6">Total Deaths</div>
-            <div class="text-h5 text-weight-bolder text-blue-grey-10">{{getCovidList[0].deaths.total.toLocaleString() }}</div>
+            <div class="text-h5 text-weight-bolder text-blue-grey-10">{{getCovidList[0].deaths.total }}</div>
             </div></br></br>
             <div style="text-align:center">
             <div class="text-h6">Total Recovered</div>
-            <div class=" text-weight-bolder text-h5 text-green-9">{{ getCovidList[0].cases.recovered.toLocaleString()}}</div>
+            <div class=" text-weight-bolder text-h5 text-green-9">{{ getCovidList[0].cases.recovered}}</div>
             </div> 
           
           </q-tab-panel>
@@ -69,7 +69,7 @@
             </q-card>
           <q-item class="row q-gutter-md">
             <q-card class="col box1" >
-              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total.toLocaleString() }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
             </q-card>
           <q-card class="col box2">
               <q-item-label><span class="itemsAll">New Affected</br>{{ item.cases.new }}</span></q-item-label>
@@ -77,7 +77,7 @@
            </q-item>
            <q-item class="row q-gutter-md">
            <q-card class="col box3">
-              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active.toLocaleString() }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active }}</span></q-item-label>
            </q-card>
               <!-- <q-card class="col box4" style="">
             <q-item-label><span class="itemsAll">Total Tests</br>{{ item.tests.total }}</span></q-item-label>
@@ -87,7 +87,7 @@
         
             </q-card>
             <q-card class="col box6">
-            <q-item-label><span class="itemsAll">Total Recovered</br>{{ item.cases.recovered.toLocaleString() }}</span></q-item-label>
+            <q-item-label><span class="itemsAll">Total Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
             </q-card>
           </q-item>
             <q-item class="row justify-center">
@@ -121,7 +121,7 @@
             </q-card>
           <q-item class="row q-gutter-md">
             <q-card class="col box1" >
-              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total.toLocaleString() }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Total Cases</br>{{ item.cases.total }}</span></q-item-label>
             </q-card>
           <q-card class="col box2">
               <q-item-label><span class="itemsAll">New Affected</br>{{ item.cases.new }}</span></q-item-label>
@@ -129,14 +129,14 @@
            </q-item>
            <q-item class="row q-gutter-md">
            <q-card class="col box3">
-              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active.toLocaleString() }}</span></q-item-label>
+              <q-item-label><span class="itemsAll">Active Cases</br>{{ item.cases.active }}</span></q-item-label>
            </q-card>
             <q-card class="col box5">
             <q-item-label><span class="itemsAll"> Death</br>{{ item.deaths.new}}</span></q-item-label>
         
             </q-card>
             <q-card class="col box6">
-            <q-item-label><span class="itemsAll">Recovered</br>{{ item.cases.recovered.toLocaleString() }}</span></q-item-label>
+            <q-item-label><span class="itemsAll">Recovered</br>{{ item.cases.recovered }}</span></q-item-label>
             </q-card>
             
             
